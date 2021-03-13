@@ -35,7 +35,7 @@ jobs:
             cd app
             flake8 .
             black . --check --exclude="migrations|env"
-            isort . --check-only --skip env
+            isort ./*/*.py --check-only --skip env
 
 
 workflows:
