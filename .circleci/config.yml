@@ -1,0 +1,24 @@
+version: 2.1
+
+
+jobs:
+  test-backend:
+    docker:
+      - image: circleci/python:3.9.0
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            pip install pytest
+      - run:
+          name: test backend
+          command: |
+            cd app
+            pytest
+
+
+workflows:
+  default:
+    jobs:
+      - test-backend
