@@ -19,7 +19,27 @@ jobs:
             pytest
 
 
+  lint-backend:
+    docker:
+      - image: circleci/python:3.9.0
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            cd app
+            pip install -r requirements.txt
+      - run:
+          name: lint backend
+          command: |
+            cd app
+            flake8 .
+            black . --check --exclude="migrations|env"
+            isort . --check-only --skip env
+
+
 workflows:
   default:
     jobs:
       - test-backend
+      - lint-backend
