@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: movies-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: movies-app
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: movies-app
+    spec:
+      containers:
+      - name: movies-app
+        image: 717791146009.dkr.ecr.ap-northeast-1.amazonaws.com/udacity-cloud-devops-capstone:main_latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+          name: default-port
+        env:
+        - name: DEBUG
+          value: "1"
+        - name: SECRET_KEY
+          value: "foo"  
+        - name: DJANGO_ALLOWED_HOSTS
+          value: "localhost 127.0.0.1 [::1]"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: movies-app
+  labels:
+    app: movies-app
+spec:
+  type: NodePort
+  ports:
+  - port: 8000
+    targetPort: 8000
+    protocol: TCP
+    name: http
+  selector:
+    app: movies-app

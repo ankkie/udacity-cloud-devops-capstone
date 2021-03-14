@@ -3,3 +3,4 @@ env
 mydatabase
 .python-version
 .DS_Store
+.kube

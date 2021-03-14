@@ -23,6 +23,11 @@ Resources:
           Value: !Sub ${EnvironmentName}-EKSSecurityGroup
       VpcId:
         Fn::ImportValue: udacity-cloud-devops-capstone-VPCID
+      SecurityGroupIngress:
+         - IpProtocol: tcp
+           CidrIp: 0.0.0.0/0
+           FromPort: 8000
+           ToPort: 8000  
 
   EKSSecurityGroupIngress:
     Type: AWS::EC2::SecurityGroupIngress
@@ -60,11 +65,6 @@ Resources:
       Subnets:
         - Fn::ImportValue: udacity-cloud-devops-capstone-PUB1-SN
         - Fn::ImportValue: udacity-cloud-devops-capstone-PUB2-SN
-      Tags:
-        - Key: Environment
-          Value: !Ref EnvironmentName
-        - Key: Name
-          Value: !Sub ${EnvironmentName}-Node
 
 
 Outputs:
