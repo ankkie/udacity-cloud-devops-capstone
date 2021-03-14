@@ -44,15 +44,17 @@ jobs:
 
   deploy-backend:
     docker:
-      - image: bitnami/kubectl
+      - image: jshimko/kube-tools-aws
     steps:
       - checkout
       - run:
           name: deploy backend
           command: |
-            aws eks --region ap-northeast-1 update-kubeconfig --name EKSCluster
-            kubectl --kubeconfig ~/.kube/config apply -f kubernetes/deployment.yaml
-            kubectl --kubeconfig ~/.kube/config apply -f kubernetes/loadbalancer.yaml
+            kubectl get svc 
+            # aws eks --region ap-northeast-1 update-kubeconfig --name EKSCluster
+            # kubectl --kubeconfig ~/.kube/config apply -f kubernetes/deployment.yaml
+            # kubectl --kubeconfig ~/.kube/config apply -f kubernetes/loadbalancer.yaml
+            # kubectl --kubeconfig ~/.kube/config rollout restart deployment/movies-app
 
 
 workflows:
