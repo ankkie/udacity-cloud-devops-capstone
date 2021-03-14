@@ -1,6 +1,10 @@
 version: 2.1
 
 
+orbs:
+  aws-ecr: circleci/aws-ecr@6.15.3
+
+
 jobs:
   test-backend:
     docker:
@@ -43,3 +47,11 @@ workflows:
     jobs:
       - test-backend
       - lint-backend
+      - aws-ecr/build-and-push-image:
+          repo: "udacity-cloud-devops-capstone"
+          path: app/
+          tag: "${CIRCLE_BRANCH}_${CIRCLE_SHA1},${CIRCLE_BRANCH}_latest"
+          requires: [test-backend, lint-backend]
+          filters:
+            branches:
+              only: [main, dev]
