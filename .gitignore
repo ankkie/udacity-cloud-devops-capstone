@@ -1,4 +1,5 @@
 __pycache__
 env
-*.sqlite3
+mydatabase
 .python-version
+.DS_Store

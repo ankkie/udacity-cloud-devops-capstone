@@ -52,6 +52,6 @@ workflows:
           path: app/
           tag: "${CIRCLE_BRANCH}_${CIRCLE_SHA1},${CIRCLE_BRANCH}_latest"
           requires: [test-backend, lint-backend]
-          # filters:
-          #   branches:
-          #     only: [main]
+          filters:
+            branches:
+              only: [main, dev]
