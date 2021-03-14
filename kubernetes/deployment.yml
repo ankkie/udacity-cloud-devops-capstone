@@ -22,11 +22,11 @@ spec:
           name: default-port
         env:
         - name: DEBUG
-          value: "0"
+          value: "1"
         - name: SECRET_KEY
           value: "foo"  
         - name: DJANGO_ALLOWED_HOSTS
-          value: "http://af5185e02b63a462186b68e137264ac0-1348571345.ap-northeast-1.elb.amazonaws.com"
+          value: "af5185e02b63a462186b68e137264ac0-1348571345.ap-northeast-1.elb.amazonaws.com"
 
 ---
 
